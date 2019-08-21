@@ -5,4 +5,4 @@ taxonomy:
         - docs
 ---
 
-<iframe src="https://alloin.org/ai/draw/" height="80%" width="80%"></iframe>
+<iframe src="https://alloin.org/ai/draw/" height="800" width="80%"></iframe>
