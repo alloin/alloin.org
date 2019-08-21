@@ -3,8 +3,8 @@ title: Home
 youtube:
     player_parameters:
         autoplay: 1
-        width: 200
-        height: 200
+        width: 200px
+        height: 200px
 ---
 
 welcome to alloin.org
