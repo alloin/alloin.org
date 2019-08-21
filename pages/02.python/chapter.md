@@ -9,4 +9,4 @@ child_type: docs
 
 # Python
 
-Discover the **basic** principles
+**Python** code snippets, examples and tutorials
