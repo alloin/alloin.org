@@ -21,6 +21,7 @@ import tensorflow as tf
 import sys
 import datetime
 import subprocess
+import keyboard
 
 import numpy as np
 
@@ -220,10 +221,25 @@ for filename in listdir(resized_dir):
             print('Error: ' + str(e))
 
 """=================================================================================================================="""
+# Didn't get the HED edges process to work on Windows, so this step is done on Google Colab for now, see <link here>
+#subprocess.call(["python", "process.py", "--input_dir", cut_dir, "--output_dir", edges_dir, "--operation", "edges"])
 
-subprocess.call(["python", "process.py", "--input_dir", cut_dir, "--output_dir", edges_dir, "--operation", "edges"])
 
-subprocess.call(["python", "process.py", "--input_dir", resized_dir, "--b_dir", edges_dir, "--output_dir", output_dir, "--operation", "combine"])
-
-subprocess.call(["python", "split.py", "--dir", output_dir])
+print("Didn't get the HED edges process to work on Windows,")
+print("only continue if your 'edges' folder is filled, Press Enter to continue or Esc to quit...")
+print("use this Google Colab to process Holistically-nested edge detection on your pictures: https://colab.research.google.com/drive/1xqYa8_3-3rZ9fqBNXTCOeKm8iX2Mxn8K")
+while True:
+    try:
+        if keyboard.is_pressed('ENTER'):
+            print("you pressed Enter...")
+            subprocess.call(
+                ["python", "process.py", "--input_dir", resized_dir, "--b_dir", edges_dir, "--output_dir", output_dir,
+                 "--operation", "combine"])
+            subprocess.call(["python", "split.py", "--dir", output_dir])
+            break
+        if keyboard.is_pressed('Esc'):
+            print("\nyou pressed Esc, so exiting...")
+            sys.exit(0)
+    except:
+        break
 ```
