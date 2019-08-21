@@ -1,5 +1,5 @@
 ---
-title: Requirements
+title: 'Image Manipulation'
 taxonomy:
     category: docs
 ---
