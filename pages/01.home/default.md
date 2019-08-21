@@ -1,5 +1,5 @@
 ---
-title: alloin.org
+title: Home
 ---
 
 welcome to alloin.org
