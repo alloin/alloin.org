@@ -48,7 +48,7 @@ We start by cloning the pix2pix-tensorflow repo
 git clone https://github.com/affinelayer/pix2pix-tensorflow.git
 cd pix2pix-tensorflow
 ```
-To train our first model, all you have to do is start pix2pix.py with the correct arguments
+To train our first model, copy/paste the **output** folder to the **pix2pix-tensorflow** folder, rename it to **cars** and start pix2pix.py with the correct arguments
 ```
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --which_direction BtoA 
 ```
