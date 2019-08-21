@@ -1,6 +1,6 @@
 ---
 title: 'Image-to-Image Translation'
-media_order: '9kFks0I.png,tBTUqNM.png,tvNhtnC.png'
+media_order: tBTUqNM.png
 taxonomy:
     category:
         - docs
@@ -38,7 +38,6 @@ The script will make folders, resize the images, remove the backgrounds, convert
 Finally, the images are put into 2 folders, for training and testing.
 
 After a while (depending on the amount of pictures), you should have 2 folders (*train* and *val*) inside the **output** folder, both containing combined sets of the images
-![](9kFks0I.png)
 
 Now that our Dataset is processed, we can finally start training our Neural Network.
 
@@ -58,7 +57,7 @@ If you have tensorboard installed, open a new terminal in the current directory 
 tensorboard --logdir=cars_train
 ```
 Now you can go to http://localhost:6006 to check your training, you should see something simular to this:
-![](tBTUqNM.png)![](tvNhtnC.png)
+![](tBTUqNM.png)
 
 ```
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --checkpoint cars_train --which_direction BtoA 
