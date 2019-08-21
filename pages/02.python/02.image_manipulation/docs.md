@@ -12,4 +12,4 @@ learning and reinforced learning. These collections of images are often refered
 at as **datasets**.
 
 ## Example
-[http://alloin.org/images/dogprocess.png](http://alloin.org/images/dogprocess.png)
+![http://alloin.org/images/dogprocess.png](http://)
