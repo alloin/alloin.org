@@ -9,6 +9,10 @@ conda activate caffe
 conda config --add channels anaconda
 conda install caffe -c willyd
 ```
+We will also need Tensorflow
+```
+pip install tensorflow-gpu
+```
 
 app.py
 ```py
