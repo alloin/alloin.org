@@ -2,18 +2,6 @@
 title: 'All in one (source to edges)'
 ---
 
-First, we create a conda enviroment for installing **caffe**
-```
-conda create -n caffe python=3.7
-conda activate caffe
-conda config --add channels anaconda
-conda install caffe -c willyd
-```
-We will also need Tensorflow
-```
-pip install tensorflow-gpu
-```
-
 app.py
 ```py
 import os
@@ -22,6 +10,7 @@ import sys
 import datetime
 import subprocess
 import keyboard
+import cv2
 
 import numpy as np
 
@@ -108,7 +97,7 @@ class DeepLabModel(object):
 
     INPUT_TENSOR_NAME = 'ImageTensor:0'
     OUTPUT_TENSOR_NAME = 'SemanticPredictions:0'
-    INPUT_SIZE = 513
+    INPUT_SIZE = 256
     FROZEN_GRAPH_NAME = 'frozen_inference_graph'
 
     def __init__(self, tarball_path):
@@ -187,7 +176,18 @@ MODEL = DeepLabModel(modelType)
 print('model loaded successfully : ' + modelType)
 
 """=================================================================================================================="""
+def auto_canny(image, sigma=0.33):
+    # compute the median of the single channel pixel intensities
+    v = np.median(image)
 
+    # apply automatic Canny edge detection using the computed median
+    lower = int(max(0, (1.0 - sigma) * v))
+    upper = int(min(255, (1.0 + sigma) * v))
+    edged = cv2.Canny(image, lower, upper)
+
+    # return the edged image
+    return edged
+"""=================================================================================================================="""
 def run_visualization(fpath, filename):
     filepath = fpath + filename
     """Inferences DeepLab model and visualizes result."""
@@ -221,25 +221,31 @@ for filename in listdir(resized_dir):
             print('Error: ' + str(e))
 
 """=================================================================================================================="""
-# Didn't get the HED edges process to work on Windows, so this step is done on Google Colab for now, see <link here>
+# Didn't get the HED edges to work on Windows, so this step is done on Google Colab or use the opencv replacement below
 #subprocess.call(["python", "process.py", "--input_dir", cut_dir, "--output_dir", edges_dir, "--operation", "edges"])
+#below is a opencv canny edges replacement untill i got the HED edges to work
+for filename in listdir(cut_dir):
+    if filename.endswith('.jpg') or filename.endswith('.png'):
+        filename_png = os.path.splitext(filename)[0] + '.png'
+        input_path = os.path.join(cut_dir, filename)
+        output_path = os.path.join(edges_dir, filename_png)
+        if os.path.isfile(output_path): continue
+        try:
+            print('Processing: ' + filename)
+            image = cv2.imread(cut_dir+filename)
+            gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+            blurred = cv2.GaussianBlur(gray, (3, 3), 0)
+            auto = auto_canny(blurred)
+            auto = cv2.bitwise_not(auto)
+            img = Image.fromarray(auto)
+            img.save(edges_dir+filename_png)
+        except Exception as e:
+            print('Error: ' + str(e))
 
+"""=================================================================================================================="""
 
-print("Didn't get the HED edges process to work on Windows,")
-print("only continue if your 'edges' folder is filled, Press Enter to continue or Esc to quit...")
-print("use this Google Colab to process Holistically-nested edge detection on your pictures: https://colab.research.google.com/drive/1xqYa8_3-3rZ9fqBNXTCOeKm8iX2Mxn8K")
-while True:
-    try:
-        if keyboard.is_pressed('ENTER'):
-            print("you pressed Enter...")
-            subprocess.call(
-                ["python", "process.py", "--input_dir", resized_dir, "--b_dir", edges_dir, "--output_dir", output_dir,
-                 "--operation", "combine"])
-            subprocess.call(["python", "split.py", "--dir", output_dir])
-            break
-        if keyboard.is_pressed('Esc'):
-            print("\nyou pressed Esc, so exiting...")
-            sys.exit(0)
-    except:
-        break
+subprocess.call(["python", "process.py", "--input_dir", resized_dir, "--b_dir", edges_dir, "--output_dir", output_dir, "--operation", "combine"])
+subprocess.call(["python", "split.py", "--dir", output_dir])
+
+"""=================================================================================================================="""
 ```
