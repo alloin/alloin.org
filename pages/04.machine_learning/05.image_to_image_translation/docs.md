@@ -30,6 +30,7 @@ cd tools
 mkdir input
 ```
 extract the Dataset into the *input* folder, be sure there's **no subfolders**
+
 run **app.py**
 ```
 python app.py
