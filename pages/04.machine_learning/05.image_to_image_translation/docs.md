@@ -57,7 +57,7 @@ If you have tensorboard installed, open a new terminal in the current directory 
 tensorboard --logdir=cars_train
 ```
 Now you can go to http://localhost:6006 to check your training, you should see something simular to this:
-![](tBTUqNM.png)
+![](tBTUqNM.png?thumbnail=default&display=thumbnail)
 
 ```
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --checkpoint cars_train --which_direction BtoA 
