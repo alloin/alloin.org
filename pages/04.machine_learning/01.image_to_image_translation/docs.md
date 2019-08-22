@@ -10,7 +10,7 @@ process:
 visible: true
 ---
 
-<center><iframe src="https://alloin.org/ai/draw/cars.html" height="450" width="100%" frameBorder="0"></iframe></center>
+<iframe src="https://alloin.org/ai/draw/cars.html" height="450" width="100%" frameBorder="0"></iframe>
 
 #Image-to-Image Translation with Conditional Adversarial Nets
 
