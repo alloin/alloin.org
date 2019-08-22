@@ -53,10 +53,12 @@ To train our first model, copy/paste the **output** folder to the **pix2pix-tens
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --which_direction BtoA 
 ```
 If everything is installed correctly, you should get a simular output:
-```progress  epoch 16  step 3674  image/sec 10.7  remaining 1870m
+```PowerShell
+progress  epoch 16  step 3674  image/sec 10.7  remaining 1870m
 discrim_loss 0.04561677
 gen_loss_GAN 7.569011
-gen_loss_L1 0.1982678```
+gen_loss_L1 0.1982678
+```
 As you can see, training this Dataset for 1000 epochs on a ***GTX 1080 ti*** takes about 31 hours to complete.
 
 gen_loss_L1 is the difference between your actual training and your goal. Actually it is the mean reduce of it.
