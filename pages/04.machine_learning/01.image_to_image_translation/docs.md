@@ -9,6 +9,8 @@ process:
     twig: true
 ---
 
+<iframe src="https://alloin.org/ai/draw/cars.html" height="350" width="80%"></iframe>
+
 #Image-to-Image Translation with Conditional Adversarial Nets
 
 In this part we will process a Dataset, train and test our Neural Network and make a javascript widget for it. 
@@ -112,9 +114,9 @@ As last steps of this tutorial, we will export our trained model.
 ```
 python pix2pix.py --mode export --output_dir cars_export --input_dir cars_train --checkpoint cars_train
 ```
+Now we will also have to convert our previous export to a format readable for our javascript widget.
 ```
 python server/tools/export-checkpoint.py --checkpoint cars_export --output_file cars_BtoA.pict
 ```
-
-to be continued...
+Now we got **cars_BtoA.pict**
 
