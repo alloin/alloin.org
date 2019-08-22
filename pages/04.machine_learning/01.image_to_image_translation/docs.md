@@ -95,12 +95,20 @@ tensorboard --logdir=cars_train
 Now you can go to [http://localhost:6006](http://localhost:6006) to check your training, you should see something simular to this:
 ![tBTUqNM.png](tBTUqNM.png?resize=600,300)![tvNhtnC.png](tvNhtnC.png?resize=600,300)
 
+During the training phase, the script saves the progress every 5000 steps, so you can stop the training anytime.
+If you happen to interrupt training, you can continue it at a later time by typing this:
 ```
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --checkpoint cars_train --which_direction BtoA 
 ```
+When the training is finally done, all progress is saved into the **cars_train** folder.
+We can test the data one final time on a new set of pictures we saved earlier with:
 ```
 python pix2pix.py --mode test --output_dir cars_test --input_dir cars/val --checkpoint cars_train
 ```
+When the test is done, it will have generated an **image**-folder and a **index.html** file, open the index.html file to see the results of the Neural Network trying to predict the line art.
+Note that the neural network does not see the result, it's only there as reference for us to see how the prediction compares to the real result.
+
+As last part of this tutorial, we will export our trained model.
 ```
 python pix2pix.py --mode export --output_dir cars_export --input_dir cars_train --checkpoint cars_train
 ```
