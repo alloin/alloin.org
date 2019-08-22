@@ -7,9 +7,10 @@ taxonomy:
 process:
     markdown: true
     twig: true
+visible: true
 ---
 
-<iframe src="https://alloin.org/ai/draw/cars.html" height="450" width="80%"></iframe>
+<center><iframe src="https://alloin.org/ai/draw/cars.html" height="450" width="600"></iframe></center>
 
 #Image-to-Image Translation with Conditional Adversarial Nets
 
