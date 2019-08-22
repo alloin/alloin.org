@@ -61,7 +61,7 @@ gen_loss_L1 0.1982678
 ```
 As you can see, training this Dataset for 1000 epochs on a ***GTX 1080 ti*** takes about 31 hours to complete.
 
-gen_loss_L1 is the difference between your actual training and your goal. Actually it is the mean reduce of it.
+gen_loss_L1 is the difference between your actual training and your goal. Actually it is the mean reduce of it. You eventually want this close to 0.
 
 ```gen_loss_L1 = tf.reduce_mean(tf.abs(targets - outputs))```
 
