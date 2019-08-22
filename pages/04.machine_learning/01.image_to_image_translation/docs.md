@@ -13,6 +13,8 @@ process:
 
 In this part we will process a Dataset, train and test our Neural Network and make a javascript widget for it. 
 
+I'm gonna assume you have a [basic knowledge of python (and pip), powershell and have CUDA and cuDNN installed](https://towardsdatascience.com/installing-tensorflow-with-cuda-cudnn-and-gpu-support-on-windows-10-60693e46e781).
+
 We will use [affinelayer's pix2pix-tensorflow](https://github.com/affinelayer/pix2pix-tensorflow) port of [Philipe Isola's pix2pix](https://github.com/phillipi/pix2pix)
 As dataset, we will use [Jonathan Krause's Cars Dataset](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
 
