@@ -14,7 +14,7 @@ visible: true
 
 #Image-to-Image Translation with Conditional Adversarial Nets
 
-In this part we will process a Dataset, train and test our Neural Network and make a javascript widget for it. 
+In this part we will process a Dataset, train and test our Neural Network and make a javascript widget like the example above. 
 
 I'm gonna assume you have a [basic knowledge of python (and pip), powershell and have CUDA and cuDNN installed](https://towardsdatascience.com/installing-tensorflow-with-cuda-cudnn-and-gpu-support-on-windows-10-60693e46e781).
 
@@ -119,5 +119,54 @@ Now we will also have to convert our previous export to a format readable for ou
 ```
 python server/tools/export-checkpoint.py --checkpoint cars_export --output_file cars_BtoA.pict
 ```
-Now we got **cars_BtoA.pict**
+Now we got **cars_BtoA.pict** which we can use with the provided javascript example in *server/static/*
 
+copy **cars_BtoA.pict** into the *server/static/models/* folder and edit **index.html**
+
+```
+<div id="cars"></div>
+<script src="deeplearn-0.3.15.js"></script>
+<script>
+
+var editor_background = new Image()
+editor_background.src = "editor.png"
+
+var DEBUG = false
+var SIZE = 256
+
+var editors = []
+var request_in_progress = false
+
+function main() {
+  var create_editor = function(config) {
+    var editor = new Editor(config)
+    var elem = document.getElementById(config.name)
+    elem.appendChild(editor.view.ctx.canvas)
+    editors.push(editor)
+  }
+
+  create_editor({
+    name: "cars",
+    weights_url: "/ai/draw/models/cars_BtoA.pict",
+    mode: "line",
+    clear: "#FFFFFF",
+    colors: {
+      line: "#000000",
+      eraser: "#ffffff",
+    },
+    draw: "#000000",
+    initial_input: "/ai/draw/00001.png",
+    initial_output: "/ai/draw/00001out.png",
+    sheet_url: "/ai/draw/edges2cars-sheet.jpg",
+  })
+
+  window.requestAnimationFrame(frame)
+}
+```
+You can then upload the entire *static* folder to your webhost, or run it locally by executing this in the server folder:
+```
+python serve.py
+```
+```PowerShell
+serving at http://127.0.0.1:8000
+```
