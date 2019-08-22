@@ -1,5 +1,9 @@
 ---
 title: 'All in one (source to edges)'
+taxonomy:
+    category:
+        - docs
+visible: true
 ---
 
 app.py
@@ -23,17 +27,16 @@ config = tf.ConfigProto()
 config.gpu_options.allow_growth=True
 sess = tf.Session(config=config)
 
+home_dir = os.path.dirname(os.path.abspath(__file__))
+
 """=================================================================================================================="""
 fill_color = '#ffffff'  # your background
 
-input_dir = 'D:/AI/tests/input/'
-resized_dir = 'D:/AI/tests/resized/'
-cut_dir = 'D:/AI/tests/cut/'
-edges_dir = 'D:/AI/tests/edges/'
-white_dir = 'D:/AI/tests/white/'
-merge_dir = 'D:/AI/tests/merged/'
-process_dir = 'D:/AI/tests/processed/'
-output_dir = 'D:/AI/tests/output/'
+input_dir = home_dir+'/input/'
+resized_dir = home_dir+'/resized/'
+cut_dir = home_dir+'/cut/'
+edges_dir = home_dir+'/edges/'
+output_dir = home_dir+'/output/'
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -47,38 +50,22 @@ if not os.path.exists(edges_dir):
     os.makedirs(edges_dir)
     print('directory created:'+edges_dir)
 
-if not os.path.exists(merge_dir):
-    os.makedirs(merge_dir)
-    print('directory created:'+merge_dir)
-
-if not os.path.exists(white_dir):
-    os.makedirs(white_dir)
-    print('directory created:'+white_dir)
-
 if not os.path.exists(cut_dir):
     os.makedirs(cut_dir)
     print('directory created:'+cut_dir)
-
-if not os.path.exists(process_dir):
-    os.makedirs(process_dir)
-    print('directory created:'+process_dir)
 
 
 print(str(len(os.listdir(input_dir))) + " input files found.")
 print(str(len(os.listdir(cut_dir))) + " cut files found.")
 print(str(len(os.listdir(resized_dir))) + " resized files found.")
 print(str(len(os.listdir(edges_dir))) + " edges files found.")
-print(str(len(os.listdir(white_dir))) + " white files found.")
-print(str(len(os.listdir(merge_dir))) + " merged files found.")
-print(str(len(os.listdir(process_dir))) + " processed files found.")
 print(str(len(os.listdir(output_dir))) + " output files found.")
 
 """=================================================================================================================="""
-#python tools/process.py --input_dir photos/dogs --operation resize --output_dir photos/dogs_resized
 subprocess.call(["python", "process.py", "--input_dir", input_dir, "--output_dir", resized_dir, "--operation", "resize"])
 """=================================================================================================================="""
 """
-!wget http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz
+!wget http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz 
 !wget http://download.tensorflow.org/models/deeplabv3_pascal_train_aug_2018_01_04.tar.gz
 
 !mkdir mobile_net_model
@@ -88,9 +75,6 @@ subprocess.call(["python", "process.py", "--input_dir", input_dir, "--output_dir
 
 !rm deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz
 !rm deeplabv3_pascal_train_aug_2018_01_04.tar.gz
-!wget http://ohrly.net/dogs_dataset.rar
-!apt install unrar
-!unrar x /content/dogs_dataset.rar 'D:/AI/tests/1/'
 """
 class DeepLabModel(object):
     """Class to load deeplab model and run inference."""
@@ -221,7 +205,7 @@ for filename in listdir(resized_dir):
             print('Error: ' + str(e))
 
 """=================================================================================================================="""
-# Didn't get the HED edges to work on Windows, so this step is done on Google Colab or use the opencv replacement below
+# Didn't get the HED edges process to work on Windows
 #subprocess.call(["python", "process.py", "--input_dir", cut_dir, "--output_dir", edges_dir, "--operation", "edges"])
 #below is a opencv canny edges replacement untill i got the HED edges to work
 for filename in listdir(cut_dir):
@@ -244,7 +228,7 @@ for filename in listdir(cut_dir):
 
 """=================================================================================================================="""
 
-subprocess.call(["python", "process.py", "--input_dir", resized_dir, "--b_dir", edges_dir, "--output_dir", output_dir, "--operation", "combine"])
+subprocess.call(["python", "process.py", "--input_dir", cut_dir, "--b_dir", edges_dir, "--output_dir", output_dir, "--operation", "combine"])
 subprocess.call(["python", "split.py", "--dir", output_dir])
 
 """=================================================================================================================="""
