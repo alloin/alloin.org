@@ -59,7 +59,7 @@ discrim_loss 0.04561677
 gen_loss_GAN 7.569011
 gen_loss_L1 0.1982678
 ```
-As you can see, training this Dataset for 1000 epochs on a ***GTX 1080 ti*** takes about 31 hours to complete.
+As you can see, training this Dataset for 1000 epochs on a ***GTX 1080 ti*** at 10.7 images per second, takes about 31 hours to complete.
 
 gen_loss_L1 is the difference between your actual training and your goal. Actually it is the mean reduce of it. You eventually want this close to 0.
 
@@ -85,13 +85,12 @@ That means in a first phase, gen_loss_L1 will decrease, and probably gan will in
 But then, when gen_loss_L1~gan you will probably see gan start decreasing (and so discrim_loss will increase).
 That means the generator starts winning over the discriminator.
 
-While training, you can look at graphs and examples of the current progress of the training through *Tensorboard* 
-If you have tensorboard installed, open a new terminal in the current directory and type 
-
+While training, you can look at graphs and examples of the current progress of the training through *Tensorboard*.
+If you have tensorboard installed, open a new terminal in the current directory and type:
 ```
 tensorboard --logdir=cars_train
 ```
-Now you can go to http://localhost:6006 to check your training, you should see something simular to this:
+Now you can go to [http://localhost:6006](http://localhost:6006) to check your training, you should see something simular to this:
 ![tBTUqNM.png](tBTUqNM.png?resize=600,300)![tvNhtnC.png](tvNhtnC.png?resize=600,300)
 
 ```
