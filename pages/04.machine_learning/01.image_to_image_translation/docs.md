@@ -52,7 +52,40 @@ To train our first model, copy/paste the **output** folder to the **pix2pix-tens
 ```
 python pix2pix.py --mode train --output_dir cars_train --max_epochs 1000 --input_dir cars/train --which_direction BtoA 
 ```
-While training, you can look at the current progress of the training through *Tensorboard*
+If everything is installed correctly, you should get a simular output:
+```
+progress  epoch 16  step 3674  image/sec 10.7  remaining 1870m
+discrim_loss 0.04561677
+gen_loss_GAN 7.569011
+gen_loss_L1 0.1982678
+```
+As you can see, training this Dataset for 1000 epochs on a ***GTX 1080 ti*** takes about 31 hours to complete.
+
+gen_loss_L1 is the difference between your actual training and your goal. Actually it is the mean reduce of it.
+
+```gen_loss_L1 = tf.reduce_mean(tf.abs(targets - outputs))```
+
+discrim_loss and gen_loss_GAN are fighting against each other. This is a mathematical artifact.
+discrim_loss is the measure of the training that aims to identify outputs as fakes.
+That measure is used to train what we call the discriminator.
+
+```discrim_loss = tf.reduce_mean(-(tf.log(predict_real + EPS) + tf.log(1 - predict_fake + EPS)))```
+
+While gen_loss_GAN is the measure of the training that aims to identify outputs as real.
+
+```gen_loss_GAN = tf.reduce_mean(-tf.log(predict_fake + EPS))```
+
+Both gen_loss_GAN and gen_loss_L1 are combined to train what we call the generator.
+Deep learning is somehow finding a needle in a haystack.
+gen_loss_L1 gives a simple way that converges fast.
+But GAN can help to go further in image details that gen_loss_L1 will hardly discover.
+
+The combination used by default in affinelayer/pix2pix.py is something like ```100*gen_loss_L1 + gan```
+That means in a first phase, gen_loss_L1 will decrease, and probably gan will increase.
+But then, when gen_loss_L1~gan you will probably see gan start decreasing (and so discrim_loss will increase).
+That means the generator starts winning over the discriminator.
+
+While training, you can look at graphs and examples of the current progress of the training through *Tensorboard* 
 If you have tensorboard installed, open a new terminal in the current directory and type 
 
 ```
