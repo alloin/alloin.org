@@ -147,7 +147,7 @@ function main() {
 
   create_editor({
     name: "cars",
-    weights_url: "/ai/draw/models/cars_BtoA.pict",
+    weights_url: "/models/cars_BtoA.pict",
     mode: "line",
     clear: "#FFFFFF",
     colors: {
@@ -155,9 +155,9 @@ function main() {
       eraser: "#ffffff",
     },
     draw: "#000000",
-    initial_input: "/ai/draw/00001.png",
-    initial_output: "/ai/draw/00001out.png",
-    sheet_url: "/ai/draw/edges2cars-sheet.jpg",
+    initial_input: "/00001.png",
+    initial_output: "/00001out.png",
+    sheet_url: "/edges2cars-sheet.jpg",
   })
 
   window.requestAnimationFrame(frame)
