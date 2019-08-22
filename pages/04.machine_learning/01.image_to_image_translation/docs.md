@@ -108,9 +108,12 @@ python pix2pix.py --mode test --output_dir cars_test --input_dir cars/val --chec
 When the test is done, it will have generated an **image**-folder and a **index.html** file, open the index.html file to see the results of the Neural Network trying to predict the line art.
 Note that the neural network does not see the result, it's only there as reference for us to see how the prediction compares to the real result.
 
-As last part of this tutorial, we will export our trained model.
+As last steps of this tutorial, we will export our trained model.
 ```
 python pix2pix.py --mode export --output_dir cars_export --input_dir cars_train --checkpoint cars_train
+```
+```
+python server/tools/export-checkpoint.py --checkpoint cars_export --output_file cars_BtoA.pict
 ```
 
 to be continued...
