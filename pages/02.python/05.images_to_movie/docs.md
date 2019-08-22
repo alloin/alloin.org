@@ -28,3 +28,7 @@ for i in range(len(img_array)):
     out.write(img_array[i])
 out.release()
 ```
+
+Example of a video created with this script:
+
+<iframe src='https://gfycat.com/ifr/SparklingClutteredAfricanfisheagle' frameborder='0' scrolling='no' allowfullscreen width='320' height='342'></iframe>
