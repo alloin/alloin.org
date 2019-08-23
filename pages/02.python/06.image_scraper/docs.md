@@ -27,6 +27,8 @@ def http_request(uri):
     return response
 
 def parse_link(link):
+# return the link between the 2 ""
+# in this case <a href="ap190822.html"> or <a href="image/1908/NGC1499_mosaic.jpg">
     link = link[link.find("\"")+1:]
     return link[:link.find("\"")]
 
@@ -36,6 +38,8 @@ def download(uri, outdir):
     index = BeautifulSoup(response.text, 'html.parser')
     lines = str(index).split('\n')
     for line in lines:
+        # check for line starting with <a and containing 'image/'
+        # in this case: (<a href="image/1908/NGC1499_mosaic.jpg">)
         if line.startswith('<a') and 'image/' in line:
             img_line = line
             break
@@ -44,6 +48,8 @@ def download(uri, outdir):
 
     prev_line = None
     for line in lines:
+        # check for line starting with <a and containing html code &lt which stands for '<'
+        # in this case: <a href="ap190822.html">&lt;</a>
         if line.startswith('<a') and '&lt' in line:
             prev_line = line
             break
