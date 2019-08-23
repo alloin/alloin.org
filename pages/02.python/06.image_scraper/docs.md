@@ -14,15 +14,12 @@ Then it will look for a line starting with ```<a``` AND containing the ```&lt```
 This way we can scrape every single image from the Astronomy Picture of the Day, going back to 1996.
 
 ```python
-import progressbar
 import os
-import os.path
 import sys
 import re
 import requests
 import urllib
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
 
 def http_request(uri):
     site = 'https://apod.nasa.gov'+uri
