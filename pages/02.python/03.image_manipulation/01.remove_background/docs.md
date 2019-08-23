@@ -1,5 +1,9 @@
 ---
 title: 'Remove Background'
+taxonomy:
+    category:
+        - docs
+visible: true
 ---
 
 #Download models to cut out the background
