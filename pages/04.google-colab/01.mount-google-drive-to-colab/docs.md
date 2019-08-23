@@ -1,5 +1,9 @@
 ---
 title: 'Mount Google Drive to Colab'
+taxonomy:
+    category:
+        - docs
+visible: true
 ---
 
 ```py
