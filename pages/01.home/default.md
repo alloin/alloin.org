@@ -1,5 +1,8 @@
 ---
 title: Home
+taxonomy:
+    category: docs
+child_type: docs
 ---
 
 welcome to alloin.org
