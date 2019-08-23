@@ -3,6 +3,7 @@ title: 'Convert Transparent pixels to white'
 taxonomy:
     category:
         - docs
+visible: true
 ---
 
 ```py
