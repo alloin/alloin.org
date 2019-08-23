@@ -6,10 +6,12 @@ taxonomy:
 visible: true
 ---
 
-This script loads https://apod.nasa.gov and checks the html source for a line starting with ```<a``` AND containing ```image``` (in this case ```<a href="image/1908/NGC1499_mosaic.jpg">```) and downloads the image to your disk.
-Then it will look for a line starting with ```<a``` AND containing the ```&lt``` symbol (in this case ```<a href="ap190822.html">&lt</a>```), generate a new link (https://apod.nasa.gov/apod/ap190822.html) and repeat step 1 with this new link.
+This script loads ```https://apod.nasa.gov``` and checks the html source for a line starting with ```<a``` AND containing ```image``` (in this case ```<a href="image/1908/NGC1499_mosaic.jpg">```) and downloads the image to your disk.
 
-This way we can scrape every single image
+Then it will look for a line starting with ```<a``` AND containing the ```&lt``` symbol (in this case ```<a href="ap190822.html">&lt</a>```), generate a new link ```https://apod.nasa.gov/apod/ap190822.html``` and repeat step 1 with this new link.
+
+
+This way we can scrape every single image from the Astronomy Picture of the Day, going back to 1996.
 
 ```python
 import progressbar
