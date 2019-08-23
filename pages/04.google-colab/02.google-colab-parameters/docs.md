@@ -1,5 +1,9 @@
 ---
 title: 'Google Colab Parameters'
+taxonomy:
+    category:
+        - docs
+visible: true
 ---
 
 ```py
