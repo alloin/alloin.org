@@ -8,7 +8,7 @@ visible: true
 
 Based on https://openai.com/blog/better-language-models/
 
-You can also run this on Google Colab: [https://github.com/alloin/alloin.org/blob/master/notebooks/GPT_2_Text_Generator.ipynb](https://github.com/alloin/alloin.org/blob/master/notebooks/GPT_2_Text_Generator.ipynb)
+You can also run this on Google Colab: [https://colab.research.google.com/github/alloin/alloin.org/blob/master/notebooks/GPT_2_Text_Generator.ipynb](https://colab.research.google.com/github/alloin/alloin.org/blob/master/notebooks/GPT_2_Text_Generator.ipynb)
 ```
 git clone https://github.com/openai/gpt-2.git
 ```
