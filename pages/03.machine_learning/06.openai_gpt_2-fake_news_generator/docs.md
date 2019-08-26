@@ -9,7 +9,7 @@ visible: true
 
 In this part I will show you how to make a *credible* Fake News Generator.
 
-![](fakenews.png)
+![](fakenews.png?resize=600,300)
 
 You'll need some knowledge about **webscraping**, the rest is pretty straightforward.
 
