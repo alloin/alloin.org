@@ -6,7 +6,7 @@ taxonomy:
 visible: true
 ---
 
-Ani-Me is a combination of python, flask, nginx and UGATIT.
+Ani-Me is a combination of python, flask, javascript, nginx and UGATIT.
 
 [Demo](http://anime.ohrly.net/)
 
